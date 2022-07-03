@@ -4,6 +4,7 @@
 #include <cmath>
 #include "block.hpp"
 #include <iostream> //for operator<<
+#include <curses.h>
 
 std::ostream& operator<<(std::ostream& out, const block& b) {
   out << "(" << b.x << "," << b.y << ")";
@@ -137,16 +138,16 @@ std::unordered_map<block, int> shape_gen(int terminalW, int terminalH) {
   int w, h, n;
   w = terminalW/6;
   h = terminalH/2;
-  n = w*h/3;
+  n = w*h/1.5;
 
   srand(time(0));
 
-  half_of_shape[block{0,h/2}] = 9; 
+  half_of_shape[block{0,h/2}] = 6; 
   edges[block{0,h/2}] = 0;
   indexed_edges.push_back(block{0,h/2});
 
   for(int i = 0; i < n; ++i) {
-    add_block(half_of_shape, edges, indexed_edges, w, h, 9-(log(i+1)/log(n))*8);
+    add_block(half_of_shape, edges, indexed_edges, w, h, 6-(log(i+1)/log(n))*5);
   }
 
   return half_of_shape;
