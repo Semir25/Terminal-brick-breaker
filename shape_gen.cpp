@@ -3,6 +3,7 @@
 #include <ctime>
 #include <cmath>
 #include "block.hpp"
+#include <iostream> //for operator<<
 
 std::ostream& operator<<(std::ostream& out, const block& b) {
   out << "(" << b.x << "," << b.y << ")";

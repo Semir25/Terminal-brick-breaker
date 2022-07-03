@@ -1,6 +1,5 @@
 #pragma once
 #include <unordered_map>
-#include <iostream>
 
 struct block {
   int x;

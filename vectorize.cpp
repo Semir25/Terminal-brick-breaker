@@ -7,13 +7,28 @@ typedef std::unordered_map<block,int> umap;
 typedef std::vector<std::vector<int>> matrix;
 
 matrix vectorize(umap um) {
-  matrix matr;
+  matrix right_half;
+  int width = 0, height = 0;
   for(auto e : um) {
     int y = e.first.y;
-    if(y >= matr.size()) matr.resize(y+1);
+    if(y >= right_half.size()) right_half.resize(y+1);
     int x = e.first.x;
-    if(x >= matr[y].size()) matr[y].resize(x+1);
-    matr[y][x] = e.second;
+    if(x >= right_half[y].size()) right_half[y].resize(x+1);
+    right_half[y][x] = e.second;
+
+    if(width < x+1) width = x+1;
+    if(height < y+1) height = y+1;
+  }
+  matrix matr;
+  matr.resize(height);
+  for(int i=0; i<height; ++i) {
+    matr[i].resize(width*2);
+    for(int j=width-right_half[i].size(); j<width; ++j) {
+      matr[i][j] = right_half[i][width-j-1];
+    }
+    for(int j=width; j<width+right_half[i].size(); ++j) {
+      matr[i][j] = right_half[i][j-width];
+    }
   }
   return matr;
 }

@@ -3,7 +3,6 @@
 #include <thread>
 #include <unordered_map>
 #include <vector>
-#include <iostream>
 #include "block.hpp"
 
 typedef std::unordered_map<block,int> umap;
